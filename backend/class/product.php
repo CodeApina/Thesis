@@ -15,4 +15,14 @@ class Product extends Sql{
     {
         $this->conn = $conn;
     }
+
+    function fetch_products(){
+        $stmt = $this->conn->prepare("SELECT * FROM posts");
+        $stmt->execute();
+        $result = $stmt->get_result();
+        while ($row = $result->fetch_assoc()){
+            $all_data[] = $row;
+        }
+        echo json_encode($all_data);
+    }
 }

@@ -2,7 +2,7 @@
 class User extends Sql{
     protected $username;
     protected $user_id;
-    protected $table = "Users";
+    protected $table = "users";
 
     function init($conn)
     {

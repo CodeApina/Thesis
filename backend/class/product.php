@@ -9,7 +9,7 @@ class Product extends Sql{
     protected $available;
     protected $times_ordered;
     protected $category;
-    protected $table = "Products";
+    protected $table = "products";
 
     function init($conn)
     {
@@ -17,12 +17,12 @@ class Product extends Sql{
     }
 
     function fetch_products(){
-        $stmt = $this->conn->prepare("SELECT * FROM posts");
+        $stmt = $this->conn->prepare("SELECT * FROM $this->table");
         $stmt->execute();
         $result = $stmt->get_result();
         while ($row = $result->fetch_assoc()){
             $all_data[] = $row;
         }
-        echo json_encode($all_data);
+        return $all_data;
     }
 }

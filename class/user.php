@@ -1,8 +1,8 @@
 <?php
-class Wishlist extends Sql{
-    protected $table = "wishlist";
+class User extends Sql{
+    protected $username;
     protected $user_id;
-    protected $product_id;
+    protected $table = "Users";
 
     function init($conn)
     {

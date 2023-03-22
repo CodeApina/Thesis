@@ -25,4 +25,10 @@ class Product extends Sql{
         }
         return $all_data;
     }
+    function fetch_for_cart($product_id){
+        $stmt = $this->conn->prepare("SELECT * FROM $this->table WHERE id= $product_id");
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result;
+    }
 }

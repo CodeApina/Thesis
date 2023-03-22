@@ -1,11 +1,18 @@
-<div class="offcanvas offcanvas-start" id="demo">
-  <div class="offcanvas-header">
-    <h1 class="offcanvas-title">Heading</h1>
-    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"></button>
-  </div>
-  <div class="offcanvas-body">
-    <p>Some text lorem ipsum.</p>
-    <p>Some text lorem ipsum.</p>
-    <button class="btn btn-secondary" type="button">A Button</button>
-  </div>
+<div style="background-color:#8E7970; height:100vh">
+    <div class="d-flex justify-content-center">
+        <a href="index.php" class="btn" role="button" style="background-color:#8E7970; width:99%">Home</a>
+    </div>
+    <div class="d-flex justify-content-center">
+        <a href="profile.php" class="btn" role="button" style="background-color:#8E7970; width:99%" id="user">Profile</a>
+    </div>
 </div>
+<script>
+    var session_logged_in='<? $_SESSION["logged_in"]?>'
+    if(session_logged_in == true){
+        document.getElementById("user").innerHTML = session_username
+    }
+    else{
+        document.getElementById("user").innerHTML = "Log in"
+        document.getElementById("user").setAttribute("href", "log_in.php");
+    }
+</script>

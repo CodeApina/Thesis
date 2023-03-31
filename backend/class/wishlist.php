@@ -1,4 +1,5 @@
 <?php
+
 class Wishlist extends Sql{
     protected $table = "wishlist";
     protected $user_id;

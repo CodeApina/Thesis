@@ -1,4 +1,5 @@
 <?php
+
 class User extends Sql{
     protected $username;
     protected $user_id;
@@ -18,16 +19,20 @@ class User extends Sql{
         $salt = $rows['salt'];
         $hash_password = hash("sha256", $salt.$password, false);
 
-        $stmt = $this->conn->prepare("SELECT * FROM $this->table WHERE username=?, password=?");
+        $stmt = $this->conn->prepare("SELECT * FROM $this->table WHERE username=? AND password=?");
         $stmt->bind_param("ss", $username, $hash_password);
         $stmt->execute();
         $result = $stmt->get_result();
-        $rows = $result->fetch_assoc();
-        $user_id = $rows['user_id'];
         if ($result->num_rows === 1){
+            $stmt = $this->conn->prepare("SELECT user_id FROM $this->table WHERE username=?");
+            $stmt->bind_param("s" ,$username);
+            $stmt->execute();
+            $result= $stmt->get_result();
+            $rows = $result->fetch_assoc();
+            $user_id = $rows['user_id'];
+            $_SESSION['user_id'] = $user_id;
             $_SESSION['logged_in'] = true;
             $_SESSION['username'] = $username;
-            $_SESSION['user_id'] = $user_id;
             return 0;
         }
         else
@@ -44,6 +49,7 @@ class User extends Sql{
         if ($rows === 0){
             $salt = $this->generateRandomString();
             $success = false;
+            $user_id = "";
             do{
                 $user_id = uniqid($prefix = "", $more_entropy = false);
                 $stmt = $this->conn->prepare("SELECT * FROM $this->table WHERE user_id = ?");
@@ -57,12 +63,25 @@ class User extends Sql{
             $hash_password = hash("sha256", $salt.$password, false);
             $stmt = $this->conn->prepare("INSERT INTO $this->table (username, salt, password, email, user_id) VALUES (?,?,?,?,?)");
             $stmt->bind_param("sssss", $username, $salt, $hash_password, $email, $user_id);
-            if ($stmt->execute())
+            if ($stmt->execute()){
+                $_SESSION['user_id'] = $user_id;
+                $_SESSION['logged_in'] = true;
+                $_SESSION['username'] = $username;
                 return 1;
+            }
             else
                 return 0;
 
         }
+    }
+
+    function address($address,$city,$zip,$country,$card_num,$expiration,$security){
+        $user_id = $_SESSION['user_id'];
+        $stmt = $this->conn->prepare("UPDATE $this->table 
+        SET address = ?, zip = ?, city = ?,country = ?,card_num = ?,expiration = ?,security = ? 
+        WHERE user_id = ?");
+        $stmt->bind_param("ssssssss", $address, $zip, $city, $country, $card_num, $expiration, $security, $user_id);
+        $stmt->execute();
     }
 
     function generateRandomString($length = 10) {

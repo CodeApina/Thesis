@@ -1,4 +1,5 @@
 <?php
+session_reset();
 session_start();
 if ($_SESSION["logged_in"] != true){
     $_SESSION["logged_in"] = false;

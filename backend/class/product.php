@@ -1,4 +1,5 @@
 <?php
+
 class Product extends Sql{
     protected $id;
     protected $name;
@@ -25,10 +26,15 @@ class Product extends Sql{
         }
         return $all_data;
     }
-    function fetch_for_cart($product_id){
-        $stmt = $this->conn->prepare("SELECT * FROM $this->table WHERE id= $product_id");
-        $stmt->execute();
-        $result = $stmt->get_result();
-        return $result;
-    }
+    function fetch_for_cart($product){
+            if ($product != null){
+                $product_id = $product['product_id'];
+                $stmt = $this->conn->prepare("SELECT * FROM $this->table WHERE id= ?");
+                $stmt->bind_param("s", $product_id);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                $row = $result->fetch_assoc();
+                return $row;
+            }
+        }
 }

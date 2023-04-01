@@ -105,10 +105,16 @@ class Cart extends Sql{
         $total_price = 0;
         $total_tax_price = 0;
         foreach ($cart_items as $product){
+            $stmt = $this->conn->prepare("SELECT num_in_cart FROM $this->table WHERE product_id=?");
+            $stmt->bind_param("s", $product['id']);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $row = $result->fetch_assoc();
+            $amount = $row['num_in_cart'];
             $price = $product['price'];
             $tax = $product['tax'];
-            $total_price += $price;
-            $total_tax_price += $price * $tax;
+            $total_price += $price * $amount;
+            $total_tax_price += $price * $amount * $tax;
         }
         $prices = [$total_price,$total_tax_price];
         return $prices;

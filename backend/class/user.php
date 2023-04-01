@@ -93,4 +93,13 @@ class User extends Sql{
         }
         return $randomString;
     }
+
+    function fetch_email($user_id){
+        $stmt = $this->conn->prepare("SELECT email FROM $this->table WHERE user_id=?");
+        $stmt->bind_param("s", $user_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc('email');
+        return $row;
+    }
 }

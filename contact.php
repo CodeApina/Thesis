@@ -19,7 +19,7 @@ include "backend/include_master.php";?>
             <iframe  width="100%" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" 
             src="https://www.openstreetmap.org/export/embed.html?bbox=27.680123448371887%2C62.89120278343008%2C27.684492766857147%2C62.892273440221295&amp;layer=mapnik&amp;marker=62.891738116711046%2C27.682308107614517" 
             style="border: 1px solid black"></iframe><br/><small><a href="https://www.openstreetmap.org/?mlat=62.89174&amp;mlon=27.68231#map=19/62.89174/27.68231&amp;layers=N">View Larger Map</a></small>
-                <form class="text-light" action="<? $_SERVER['PHP_SELF']?>" method="POST">
+                <form class="text-light" action="<?php echo $_SERVER['PHP_SELF']?>" method="POST">
                     <div class="mb-3 mt-3 container-fluid">
                         <label for="email" class="form_label">Email:</label>
                         <br>

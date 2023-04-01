@@ -56,11 +56,6 @@ include "backend/include_master.php";?>
                             <br>
                             <input type="text" class="form_control" id="security" placeholder="Enter card security number" name="security">
                         </div>
-                        <div class="mb-3 mt-3 container-fluid">
-                            <label for="email" class="form-label">Email:</label>
-                            <br>
-                            <input type="email" class="form_control" id="city" placeholder="Enter email" name="email">
-                        </div>
                         <div class="container-fluid">
                             <button type="submit" id="buy" onClick="buy_click()" class="btn btn-secondary">Submit</button>
                         </div>
@@ -123,9 +118,9 @@ include "backend/include_master.php";?>
             var html = "";
             let no_tax = prices[0];
             let taxed = prices[1];
-            html = '<div>Price including tax:<b> '+ (taxed + '') +'</b></div>'
+            html = '<div>Price including tax:<b> '+ (taxed + '') +'€</b></div>'
             document.getElementById("taxed").innerHTML = html;
-            html = '<div>Price excluding tax: <b>'+ (no_tax + '') +'</b></div>'
+            html = '<div>Price excluding tax: <b>'+ (no_tax + '') +'€</b></div>'
             document.getElementById("price").innerHTML = html;
 
         })

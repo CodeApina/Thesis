@@ -15,7 +15,7 @@ include "backend/bootstrap.php";
                     <?php include "sidebar.php" ?>
                 </div>
                 <div class="col-10 col-xl-11">
-                    <form action="<? $_SERVER['PHP_SELF']?>" method="POST">
+                    <form action="<?php echo $_SERVER['PHP_SELF']?>" method="POST">
                         <div class="mb-3 mt-3 container-fluid">
                             <label for="text" class="form-label">Email:</label>
                             <br>

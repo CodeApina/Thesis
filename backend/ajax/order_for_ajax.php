@@ -12,9 +12,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
         , $_POST['country'], $_POST['card_num'], $_POST['expiration'], $_POST['security']);
 }
  
-$cart = new Order();
+$order = new Order();
 $user_id = $_SESSION["user_id"];
-if ($cart->order($user_id)){
+if ($order->order($user_id)){
     $response = "Order successful";
     $txt = "Thank you for your order";
     $user = new User();

@@ -20,7 +20,7 @@ include "backend/include_master.php";?>
                 <?php include "sidebar.php" ?>
             </div>
             <div class="col-5 col-xl-5 pl-0 pr-0 ml-0 mr-0 no-gutters">
-            <form class="text-light" action='backend/ajax/order_for_ajax.php' method="POST">
+            <form class="text-light">
                      <div class="mb-3 mt-3 container-fluid">
                             <label for="address" class="form-label">Address:</label>
                             <br>
